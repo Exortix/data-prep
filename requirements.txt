@@ -1,2 +1,8 @@
 langchain-ollama
 langchain-core
+langchain-community
+langchain
+numpy 
+pypdf
+# needs https://www.swig.org/download.html
+faiss-cpu
