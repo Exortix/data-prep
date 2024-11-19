@@ -25,14 +25,12 @@ def create_rag_chain(vector_store):
     llm = ChatOllama(model="llama3.1")
     
     # Create a custom prompt template
-    template = """Use ONLY the context provided to answer the question. 
-    If the information is not in the context, say "I cannot find the answer in the provided documents."
-
+    template = """
+    Use ONLY the context provided to answer the prompt.
     Context: {context}
-
-    Question: {question}
-
-    Helpful Answer:"""
+    Prompt: {question}
+    
+    """
     
     prompt = PromptTemplate.from_template(template)
     
