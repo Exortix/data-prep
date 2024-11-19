@@ -1,15 +1,11 @@
 import os
-import tempfile
-from langchain.vectorstores import FAISS
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.vectorstores import FAISS  # Updated import
+from langchain_community.document_loaders import PyPDFLoader  # Updated import
+from langchain_ollama import OllamaEmbeddings  # Updated import
 from langchain.docstore.document import Document
-from langchain.embeddings import OllamaEmbeddings
 
 # Initialize Ollama embeddings
-embedding_model = OllamaEmbeddings(model="ollama3.1")
-
-input_text = input("Enter Course Name: ")
-post_fix = f"{input_text}-vector-db-ollama"
+embedding_model = OllamaEmbeddings(model="llama3")
 
 def create_vector_db():
     # Specify the directory containing the PDF files and convert it to an absolute path
@@ -32,10 +28,15 @@ def create_vector_db():
     # Create a FAISS vector store
     vector_store = FAISS.from_documents(documents=documents, embedding=embedding_model)
 
-    # Save the vector store to a temporary directory
-    with tempfile.TemporaryDirectory() as temp_dir:
-        vector_store.save_local(temp_dir)
-        print(f"Vector store created and saved locally in temporary directory: {temp_dir}")
+    # Save the vector store to the same directory as the Python file
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    vector_store_path = os.path.join(current_directory, "vector_store")
+
+    # Save the vector store locally
+    vector_store.save_local(vector_store_path)
+    print(f"Vector store created and saved locally in: {vector_store_path}")
 
 # Call the function to create the vector store
-create_vector_db()
+if __name__ == "__main__":
+    input_text = input("Enter Course Name: ")
+    create_vector_db()
