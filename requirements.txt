@@ -5,3 +5,4 @@ langchain==0.3.7
 numpy==1.26.2
 pypdf==4.2.0
 faiss-cpu==1.8.0.post1
+jq==1.8.0

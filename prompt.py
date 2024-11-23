@@ -8,7 +8,7 @@ from langchain_core.output_parsers import StrOutputParser
 def load_vector_store():
     # Get the current directory of the script
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    vector_store_path = os.path.join(current_directory, "vector_store")
+    vector_store_path = os.path.join(current_directory, "multi_data_vector_store")
     
     # Initialize embeddings
     embedding_model = OllamaEmbeddings(model="llama3.1")
