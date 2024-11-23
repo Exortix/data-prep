@@ -5,7 +5,7 @@ from langchain_ollama import OllamaEmbeddings  # Updated import
 from langchain.docstore.document import Document
 
 # Initialize Ollama embeddings
-embedding_model = OllamaEmbeddings(model="llama3.1")
+embedding_model = OllamaEmbeddings(model="llama3.1", base_url="http://localhost:11434")
 
 def create_vector_db():
     # Specify the directory containing the PDF files and convert it to an absolute path
@@ -38,5 +38,4 @@ def create_vector_db():
 
 # Call the function to create the vector store
 if __name__ == "__main__":
-    input_text = input("Enter Course Name: ")
     create_vector_db()
